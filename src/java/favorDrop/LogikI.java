@@ -1,4 +1,4 @@
-package favorlogik;
+package favorDrop;
 
 import javax.jws.WebMethod;
 import javax.jws.WebService;
