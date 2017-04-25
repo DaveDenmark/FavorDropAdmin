@@ -5,7 +5,7 @@
 <%@page import="java.rmi.RemoteException"%>
 <%@page import="javax.xml.namespace.QName"%>
 <%@page import="javax.xml.ws.Service"%>
-<%@page import="favorlogik.LogikI"%>
+<%@page import="favorDrop.LogikI"%>
 
 <html>
 <head><title>Redirection</title></head>

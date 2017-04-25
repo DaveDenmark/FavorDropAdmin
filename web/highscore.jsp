@@ -5,7 +5,7 @@
 <%@page import="java.rmi.RemoteException"%>
 <%@page import="javax.xml.namespace.QName"%>
 <%@page import="javax.xml.ws.Service"%>
-<%@page import="favorlogik.LogikI"%>
+<%@page import="favorDrop.LogikI"%>
 
 <%
 // se om attributten "logget ind" er sat i sessionen
@@ -22,7 +22,7 @@ response.sendRedirect("index.jsp");
 <p1>Her ses en specifik spillers historik</p1>
 
 <%
-URL url = new URL("http://localhost:18373/FavorDropSoap?wsdl");
+URL url = new URL("http://localhost:18372/FavorDropSoap?wsdl");
 QName qname = new QName("http://favorDrop/", "LogikService");
 Service service = Service.create(url, qname);
 LogikI g = service.getPort(LogikI.class);
