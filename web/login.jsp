@@ -7,9 +7,6 @@
 <%@page import="javax.xml.ws.Service"%>
 <%@page import="favorDrop.LogikI"%>
 
-<html>
-<head><title>Redirection</title></head>
-<body>
 <% 
 URL url = new URL("http://localhost:18372/FavorDropSoap?wsdl");
 QName qname = new QName("http://favorDrop/", "LogikService");
@@ -24,7 +21,7 @@ session.setAttribute("logget ind", "ja");
 session.setAttribute("brugernavn", request.getParameter("brugernavn"));
 session.setAttribute("adgangskode", request.getParameter("adgangskode"));
 out.println("Du er logget korrekt ind.");
-request.getRequestDispatcher("highscore.jsp").forward(request, response);
+request.getRequestDispatcher("favorinfosite.jsp").forward(request, response);
 }
 else
 {
@@ -34,7 +31,3 @@ out.println("Forkert brugernavn eller adgangskode.");
 response.sendRedirect("index.jsp");
 }
 %>
-Du kan nu prøve at gå videre til <a href="highscore.jsp">den beskyttede side</a>
-eller gå tilbage og logge ind igen.
-</body>
-</html>

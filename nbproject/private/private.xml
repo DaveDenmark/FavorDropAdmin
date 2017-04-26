@@ -3,8 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/TheDave/NetBeansProjects/FavorDropAdmin/src/java/favorlogik/LogikI.java</file>
+            <file>file:/Users/TheDave/NetBeansProjects/FavorDropAdmin/src/java/favorDrop/LogikI.java</file>
+            <file>file:/Users/TheDave/NetBeansProjects/FavorDropAdmin/web/index.jsp</file>
+            <file>file:/Users/TheDave/NetBeansProjects/FavorDropAdmin/web/favorinfosite.jsp</file>
             <file>file:/Users/TheDave/NetBeansProjects/FavorDropAdmin/web/login.jsp</file>
+            <file>file:/Users/TheDave/NetBeansProjects/FavorDropAdmin/web/styles.css</file>
         </group>
     </open-files>
 </project-private>
