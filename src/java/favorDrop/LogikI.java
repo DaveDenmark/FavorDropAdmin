@@ -9,7 +9,7 @@ import javax.jws.WebService;
 
 @WebService 
 public interface LogikI {
-  @WebMethod boolean login2(String bruger, String adgangskode) throws Exception;
+  @WebMethod boolean login(String bruger, String adgangskode) throws Exception;
     @WebMethod String getClients(String user, String adgangskode);
     @WebMethod String getOrders(String user, String adgangskode);
     @WebMethod String getPartners(String user, String adgangskode);

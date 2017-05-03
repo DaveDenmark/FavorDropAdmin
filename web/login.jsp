@@ -15,7 +15,7 @@ LogikI g = service.getPort(LogikI.class);
 
 // hvis brugernavn="Jacob" og adgangskode="hemli" logges der ind.
 // dette burde selvfølgelig hentes fra en database eller lign.
-if (g.login2(request.getParameter("brugernavn"),request.getParameter("adgangskode"))) {
+if (g.login(request.getParameter("brugernavn"),request.getParameter("adgangskode"))) {
 // sæt attributten "logget ind" i sessionen
 session.setAttribute("logget ind", "ja");
 session.setAttribute("brugernavn", request.getParameter("brugernavn"));

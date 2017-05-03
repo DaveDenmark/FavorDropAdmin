@@ -26,9 +26,6 @@ URL url = new URL("http://localhost:18372/FavorDropSoap?wsdl");
 QName qname = new QName("http://favorDrop/", "LogikService");
 Service service = Service.create(url, qname);
 LogikI g = service.getPort(LogikI.class);
-
-session.setAttribute("Antal brugere",g.getClients(user, adgangskode));
-session.setAttribute("tabteSpil", g.getLostGames((String)session.getAttribute("brugernavn"),(String)session.getAttribute("adgangskode")));
 %>
 <table>
   <tr>
