@@ -8,11 +8,11 @@
 <%@page import="favorDrop.LogikI"%>
 
 <% 
-URL url = new URL("http://localhost:18372/FavorDropSoap?wsdl");
+URL url = new URL("http://ubuntu4.javabog.dk:18372/FavorDropSoap?wsdl");
 QName qname = new QName("http://favorDrop/", "LogikService");
 Service service = Service.create(url, qname);
 LogikI g = service.getPort(LogikI.class);
-
+out.print("Login virker");
 // hvis brugernavn="Jacob" og adgangskode="hemli" logges der ind.
 // dette burde selvfølgelig hentes fra en database eller lign.
 if (g.login(request.getParameter("brugernavn"),request.getParameter("adgangskode"))) {

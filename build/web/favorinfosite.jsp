@@ -7,6 +7,7 @@
 <%@page import="javax.xml.ws.Service"%>
 <%@page import="favorDrop.LogikI"%>
 
+
 <%
 // se om attributten "logget ind" er sat i sessionen
 if (session.getAttribute("logget ind") == null) {
@@ -19,25 +20,35 @@ response.sendRedirect("index.jsp");
   <link rel="stylesheet" type="text/css" href="styles.css"
 </head>
 <body>
-<p1>Her ses en specifik spillers historik</p1>
-
+    
+        <img id="logoid" src="assets/favordroplogo250.png"></img>
+        <br>
+        <h1>Velkommen til FavorDrop Admin site</h1>
+        <p1>Her ses FavorDrops antal af ordrer, brugere og partnere</p1>
+        <a href="favorinfosite.jsp">Opdater</a>
+        
 <%
-URL url = new URL("http://localhost:18372/FavorDropSoap?wsdl");
+URL url = new URL("http://ubuntu4.javabog.dk:18372/FavorDropSoap?wsdl");
 QName qname = new QName("http://favorDrop/", "LogikService");
 Service service = Service.create(url, qname);
 LogikI g = service.getPort(LogikI.class);
+String orders = g.getSuccededOrdersA(request.getParameter("brugernavn"),request.getParameter("adgangskode"));
+session.setAttribute("Orders", g.getSuccededOrdersA((String)session.getAttribute("brugernavn"),(String)session.getAttribute("adgangskode")));
+session.setAttribute("Brugere", g.getClientsA((String)session.getAttribute("brugernavn"),(String)session.getAttribute("adgangskode")));
+session.setAttribute("Partnere", g.getPartnersA((String)session.getAttribute("brugernavn"),(String)session.getAttribute("adgangskode")));
 %>
 <table>
   <tr>
-    <th></th>
-    <th>Antal brugere</th>
     <th>Antal Ordrer</th>
+    <th>Antal brugere</th>
     <th>Antal Partnere</th>
   </tr>
   <tr>
-    <td>${sessionScope.brugernavn}</td>
-    <td>${sessionScope.vundneSpil}</td>
-    <td>${sessionScope.tabteSpil}</td>
+    <td>${sessionScope.Orders}</td>
+    <td>${sessionScope.Brugere}</td>    
+    <td>${sessionScope.Partnere}</td>
+  
+  
   </tr>
 </table>
 
