@@ -16,11 +16,13 @@ LogikI g = service.getPort(LogikI.class);
 out.print("Login virker");
 // hvis brugernavn="Jacob" og adgangskode="hemli" logges der ind.
 // dette burde selvfølgelig hentes fra en database eller lign.
-if (g.login(request.getParameter("brugernavn"),request.getParameter("adgangskode"))) {
+String token = g.login(request.getParameter("brugernavn"),request.getParameter("adgangskode"));
+if (token != "Not authorized") {
 // sæt attributten "logget ind" i sessionen
 session.setAttribute("logget ind", "ja");
 session.setAttribute("brugernavn", request.getParameter("brugernavn"));
 session.setAttribute("adgangskode", request.getParameter("adgangskode"));
+session.setAttribute("token", token);
 out.println("Du er logget korrekt ind.");
 request.getRequestDispatcher("favorinfosite.jsp").forward(request, response);
 }
