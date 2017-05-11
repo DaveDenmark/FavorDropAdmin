@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.net.MalformedURLException"%>
 <%@page import="java.net.URL"%>
 <%@page import="java.rmi.Naming"%>
@@ -25,7 +26,8 @@ response.sendRedirect("index.jsp");
         <br>
         <h1>Velkommen til Favor Drop Admin site</h1>
         <p1>Her ses Favor Drops antal af ordrer, brugere og partnere</p1>
-        <a href="favorinfosite.jsp">Opdater</a>
+        <a  href="favorinfosite.jsp">Opdater</a>
+        
         
 <%
 //URL url = new URL("http://ubuntu4.javabog.dk:18372/FavorDropSoap?wsdl");
@@ -33,25 +35,67 @@ URL url = new URL("http://localhost:18372/FavorDropSoap?wsdl");
 QName qname = new QName("http://favorDrop/", "LogikService");
 Service service = Service.create(url, qname);
 LogikI g = service.getPort(LogikI.class);
-String orders = g.getSuccededOrdersA(request.getParameter("brugernavn"),request.getParameter("adgangskode"));
-session.setAttribute("Orders", g.getSuccededOrdersA((String)session.getAttribute("brugernavn"),(String)session.getAttribute("adgangskode")));
+session.setAttribute("Orders", g.getCompletedOrdersLength((String)session.getAttribute("brugernavn"),(String)session.getAttribute("adgangskode")));
 session.setAttribute("Brugere", g.getClientsA((String)session.getAttribute("brugernavn"),(String)session.getAttribute("adgangskode")));
 session.setAttribute("Partnere", g.getPartnersA((String)session.getAttribute("brugernavn"),(String)session.getAttribute("adgangskode")));
+session.setAttribute("OrdersNew", g.getOrdersNew((String)session.getAttribute("brugernavn"),(String)session.getAttribute("adgangskode")).toString());
+session.setAttribute("OrdersInService", g.getOrdersInService((String)session.getAttribute("brugernavn"),(String)session.getAttribute("adgangskode")).toString());
 %>
+
 <table>
   <tr>
-    <th>Antal Ordrer</th>
-    <th>Antal brugere</th>
-    <th>Antal Partnere</th>
+    <th>Antal Favor Drop ordrer</th>
+    <th>Antal Favor Drop brugere</th>
+    <th>Antal Favor Drop Partnere</th>
   </tr>
   <tr>
     <td>${sessionScope.Orders}</td>
     <td>${sessionScope.Brugere}</td>    
     <td>${sessionScope.Partnere}</td>
-  
-  
   </tr>
 </table>
+  
+  <h1>OrdreID oversigt</h1>
+  <table>
+      <tr>
+          <th>Nye Favor Drop ordre</th>
+          <th>Igangværende Favor Drop ordre</th>
+      </tr>
+      
+      <tr>
+          <td>
+           ${sessionScope.OrdersNew}
+          <p>Slet igangværende ordre ved at indtaste dets OrdreID</p>
+          <form metod="POST" action="favorinfosite.jsp">
+          <input type="text" placeholder="Indtast ordreID" name="orderNewID" required="true" minLength="5" maxLength="5">
+          <input type="submit" value="Fjern denne ordre">
+          </form>
+          </td>
+          
+          <%
+          session.setAttribute("orderNewID", request.getParameter("orderNewID"));
+          g.deleteorderNew((String)session.getAttribute("brugernavn"),(String)session.getAttribute("adgangskode"),(String)session.getAttribute("orderNewID"));   
+          %>
+          
+          <td>
+          ${sessionScope.OrdersInService}
+          <p>Slet ny ordre ved at indtaste dets OrdreID</p>
+          <form metod="POST" action="favorinfosite.jsp">
+          <input type="text" placeholder="Indtast ordreID" name="orderInServiceID" required="true" minLength="5" maxLength="5">
+          <input type="submit" value="Fjern denne ordre">
+          
+          <%
+          g.deleteorderInService((String)session.getAttribute("brugernavn"),(String)session.getAttribute("adgangskode"),request.getParameter("orderInServiceID"));   
+          %>
+          </form>
+          </td>
+          
+      </tr> 
+  </table>
+  
+  
+  
+  
 
 </body>
 </html>
