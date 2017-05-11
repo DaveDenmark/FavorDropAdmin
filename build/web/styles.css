@@ -72,6 +72,5 @@ th, td {
     width: 30%;
 }
 #logoid {
-   position: fixed;
-    right: 500px;
+   position: relative;
 }

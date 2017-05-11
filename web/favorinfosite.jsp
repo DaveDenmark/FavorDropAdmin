@@ -23,12 +23,13 @@ response.sendRedirect("index.jsp");
     
         <img id="logoid" src="assets/favordroplogo250.png"></img>
         <br>
-        <h1>Velkommen til FavorDrop Admin site</h1>
-        <p1>Her ses FavorDrops antal af ordrer, brugere og partnere</p1>
+        <h1>Velkommen til Favor Drop Admin site</h1>
+        <p1>Her ses Favor Drops antal af ordrer, brugere og partnere</p1>
         <a href="favorinfosite.jsp">Opdater</a>
         
 <%
-URL url = new URL("http://ubuntu4.javabog.dk:18372/FavorDropSoap?wsdl");
+//URL url = new URL("http://ubuntu4.javabog.dk:18372/FavorDropSoap?wsdl");
+URL url = new URL("http://localhost:18372/FavorDropSoap?wsdl");
 QName qname = new QName("http://favorDrop/", "LogikService");
 Service service = Service.create(url, qname);
 LogikI g = service.getPort(LogikI.class);
