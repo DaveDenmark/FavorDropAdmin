@@ -13,11 +13,19 @@ URL url = new URL("http://52.213.91.0:18372/FavorDropSoap?wsdl");
 QName qname = new QName("http://favorDrop/", "LogikService");
 Service service = Service.create(url, qname);
 LogikI g = service.getPort(LogikI.class);
+boolean loggedIn = false;
 out.print("Login virker");
 // hvis brugernavn="Jacob" og adgangskode="hemli" logges der ind.
 // dette burde selvfølgelig hentes fra en database eller lign.
 String token = g.login(request.getParameter("brugernavn"),request.getParameter("adgangskode"));
-if (token != "Not authorized") {
+if ("Not authorized".equals(token)) {
+// fjern attributten "logget ind" fra sessionen
+session.removeAttribute("logget ind");
+out.println("Forkert brugernavn eller adgangskode.");
+response.sendRedirect("index.jsp");
+}
+else
+{
 // sæt attributten "logget ind" i sessionen
 session.setAttribute("logget ind", "ja");
 session.setAttribute("brugernavn", request.getParameter("brugernavn"));
@@ -25,12 +33,5 @@ session.setAttribute("adgangskode", request.getParameter("adgangskode"));
 session.setAttribute("token", token);
 out.println("Du er logget korrekt ind.");
 request.getRequestDispatcher("favorinfosite.jsp").forward(request, response);
-}
-else
-{
-// fjern attributten "logget ind" fra sessionen
-session.removeAttribute("logget ind");
-out.println("Forkert brugernavn eller adgangskode.");
-response.sendRedirect("index.jsp");
 }
 %>
