@@ -26,7 +26,8 @@ response.sendRedirect("index.jsp");
         <br>
         <h1>Velkommen til Favor Drop Admin site</h1>
         <p1>Her ses Favor Drops antal af ordrer, brugere og partnere</p1>
-        <a  href="favorinfosite.jsp">Opdater</a>
+        <br>
+        <br>
         
         
 <%
