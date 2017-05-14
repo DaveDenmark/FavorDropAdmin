@@ -30,8 +30,6 @@ response.sendRedirect("index.jsp");
         
         
 <%
-    
-//URL url = new URL("http://ubuntu4.javabog.dk:18372/FavorDropSoap?wsdl");
 URL url = new URL("http://52.213.91.0:18372/FavorDropSoap?wsdl");
 QName qname = new QName("http://favorDrop/", "LogikService");
 Service service = Service.create(url, qname);
